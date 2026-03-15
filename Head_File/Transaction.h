@@ -21,10 +21,11 @@ class Transaction{
     Transaction(string n, double a, Date d, string no, bool t);
 
     void Display();
-    double getAmount();
+    double getAmount() const;
     Date getDate() const;
-    bool getType();
-    string getName();
+    bool getType() const ;
+    string getName() const;
+    string getNote() const;
 
     bool operator==(const Transaction& other)
     {
