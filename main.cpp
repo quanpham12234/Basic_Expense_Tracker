@@ -49,6 +49,7 @@ int main()
         break;
         case 3:
         {
+            cout << "\n";
             manage.Show_Attribute_Expense();
             manage.Show_Day_Expense();
         }

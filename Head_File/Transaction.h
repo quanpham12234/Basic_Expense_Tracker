@@ -7,6 +7,7 @@ using namespace std;
 
 struct Date{
     int day, month, year;
+    string toString();
 };
 
 class Transaction{

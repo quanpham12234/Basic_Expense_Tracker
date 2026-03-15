@@ -10,11 +10,16 @@ Transaction::Transaction(string n, double a, Date d, string no, bool t){
     type = t;
 }
 
+string Date::toString()
+{
+    return to_string(day) + "/" + to_string(month) + "/" + to_string(year);
+}
+
 void Transaction::Display(){
     cout << "| "
      << left << setw(15) << name
-     << "| " << setw(12) << amount
-     << "| " << setw(10) << date.day << "/" << date.month << "/" << date.year
+     << "| " << setw(12) << fixed << setprecision(0) << amount
+     << "| " << setw(15) << date.toString()
      << "| " << setw(15) << note;
      if (type == 1) cout << "| " << setw(10) << "INCOME";
      else cout << "| " << setw(10) << "OUTCOME";

@@ -104,7 +104,7 @@ double Expense_manage::get_Total_expense(){
 
 void Expense_manage::printLine()
 {
-    cout << string(61, '-') << endl;
+    cout << string(78, '-') << endl;
 }
 
 void Expense_manage::Show_Attribute_Expense()
@@ -113,7 +113,7 @@ void Expense_manage::Show_Attribute_Expense()
     cout << "| " << left << setw(15) << "Name"
          << "| " << setw(12) << "Amount"
          << "| " << setw(10) << "Date"
-         << "| " << setw(15) << "Note"
+         << "\t| " << setw(15) << "Note"
          << "| " << setw(10) << "Type" << "|\n";
     printLine();
 }
@@ -139,4 +139,6 @@ vector<Transaction>& Expense_manage::getTransactions()
 {
     return Transactions;
 }
+
+
 
