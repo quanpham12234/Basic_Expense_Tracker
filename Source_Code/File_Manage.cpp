@@ -32,6 +32,8 @@ void File_Manage::SaveCSV(const vector<Transaction> &data)
     }
 
     fout.close();
+
+    cout << "Finish save file!" << endl;
 }
 
 void File_Manage::LoadCSV(vector<Transaction> &data)

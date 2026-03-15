@@ -3,7 +3,7 @@
 #include <iomanip>
 #include <algorithm>
 
-bool cmp(Transaction a, Transaction b) // Sort theo date -> income -> amount -> name
+bool cmp(Transaction a,Transaction b) // Sort theo date -> income -> amount -> name
 {
     int a_date = a.getDate().year * 10000 + a.getDate().month * 100 + a.getDate().day;
     int b_date = b.getDate().year * 10000 + b.getDate().month * 100 + b.getDate().day;
@@ -17,6 +17,11 @@ bool cmp(Transaction a, Transaction b) // Sort theo date -> income -> amount -> 
     if (a.getName() != b.getName()) return a.getName() < b.getName();
     
     return false;
+}
+
+double Exchange_Date(const Date &a){
+    double date = a.year * 10000 + a.month * 100 + a.day;
+    return date;
 }
 
 Transaction Expense_manage::Transaction_input(bool type)
@@ -45,14 +50,12 @@ Transaction Expense_manage::Transaction_input(bool type)
 void Expense_manage::addExpense()
 {
     Transactions.push_back(Transaction_input(0));
-    remainder -= Transactions.back().getAmount();
     sort(Transactions.begin(),Transactions.end(),cmp); 
 }
 
 void Expense_manage::addIncome()
 {
     Transactions.push_back(Transaction_input(1));
-    remainder += Transactions.back().getAmount();
     sort(Transactions.begin(),Transactions.end(),cmp);
 }
 
@@ -65,6 +68,38 @@ void Expense_manage::add_aim()
 void Expense_manage::add_max_expense(){
     cout << "Your max expense: ";
     cin >> max_expense;
+    cout << "Limit From (DD-MM-YY): ";
+    cin >> Start_Limit.day >> Start_Limit.month >> Start_Limit.year;
+
+    cout << "Limit End (DD-MM-YY): ";
+    cin >> End_Limit.day >> End_Limit.month >> End_Limit.year;
+}
+
+double Expense_manage::get_Total(){
+    double sum = 0;
+    for (auto it : Transactions)
+        sum += (it.getType() == 1)? it.getAmount() : -it.getAmount();
+
+    return sum;
+}
+
+double Expense_manage::get_aim(){
+    return aim;
+}
+
+double Expense_manage::get_max_expense(){
+    return max_expense;
+}
+
+double Expense_manage::get_Total_expense(){
+    double sum = 0;
+
+    for (auto it : Transactions)
+    {
+        if (!it.getType() && (Exchange_Date(it.getDate()) <= Exchange_Date(End_Limit) && Exchange_Date(Start_Limit) <= Exchange_Date(it.getDate())))
+        sum += it.getAmount();
+    }
+    return sum;
 }
 
 void Expense_manage::printLine()
@@ -100,4 +135,8 @@ void Expense_manage::Notify_Aim_Enough(){
     cout << "CONGRATULATIONS: Ban da tiet kiem du " << aim << " roi!" << endl;
 }
 
+vector<Transaction>& Expense_manage::getTransactions()
+{
+    return Transactions;
+}
 

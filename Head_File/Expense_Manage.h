@@ -10,9 +10,10 @@ class Expense_manage
 {
 private:
     vector<Transaction> Transactions;
-    static double remainder;
     double aim;
     double max_expense;
+    Date Start_Limit;
+    Date End_Limit;
 
 public:
     Transaction Transaction_input(bool type);
@@ -20,6 +21,11 @@ public:
     void addExpense();
     void add_aim();
     void add_max_expense();
+    double get_Total();
+    double get_Total_expense();
+    vector<Transaction>& getTransactions();
+    double get_aim();
+    double get_max_expense();
 
     void printLine();
 
